@@ -1,6 +1,5 @@
 # Sensor context
 
-- TODO — Rig: mô tả ngắn xe/camera gắn ở đâu theo hiểu biết của bạn từ ảnh (ADASIND không kèm tài liệu rig chi
-  tiết, ghi theo quan sát).
-- TODO — `ego_body` nhìn thấy ở đâu trong frame (góc capo, gương, tay lái...).
-- TODO — Vòng kính (lens circle) nằm ở vị trí nào trong ảnh, chiếm khoảng bao nhiêu phần khung hình.
+- **Rig:** Camera fisheye đơn sắc nét góc siêu rộng (ultra-wide fisheye FOV ~180°–190°) được gắn trên xe thử nghiệm thực tế thuộc tập dữ liệu giao thông ADASIND (Ấn Độ). Vị trí lắp đặt hướng về phía trước (front-facing), đặt ở tầm cao khoảng 1.2m – 1.5m so với mặt đất (khu vực giữa nắp capo hoặc kính chắn gió/nóc xe), giúp bao quát toàn cảnh giao thông phía trước từ mép cận thân xe đến hai bên lề đường.
+- **`ego_body`:** Phần thân xe ego xuất hiện chủ yếu ở khu vực sát đáy khung hình (bottom edge/bottom corners), thể hiện qua một phần mép capo trước (front hood/bonnet) hoặc viền cản trước của xe ego trong 46/48 frame. Một số frame đặc biệt (như 006840, 271039) camera có góc ngẩng cao hơn hoặc không nhìn thấy thân xe nên không có polygon `ego_body`.
+- **Vòng kính (lens circle):** Vòng tròn mắt cá (circular fisheye projection) nằm gần chính giữa khung hình kích thước 1080 × 1920 px, tâm vòng kính nằm quanh tọa độ (cx ≈ 450–650 px, cy ≈ 900–1050 px) với bán kính r ≈ 770–840 px. Vòng kính hiệu dụng chiếm khoảng 75%–85% diện tích khung hình; các góc và dải biên bên ngoài vòng tròn là vùng tối quang học (optical vignette / black mask) được loại trừ bởi hai polygon `lens_border`.

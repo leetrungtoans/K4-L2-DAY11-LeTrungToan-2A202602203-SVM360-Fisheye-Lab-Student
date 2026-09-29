@@ -1,0 +1,7 @@
+# Guideline patch
+
+- **Rule mới đề xuất:** **R04-EXT — Ranh giới phân loại xe bán tải/pickup chở hàng tại thị trường Ấn Độ:** Khi gặp phương tiện có thùng hàng (cargo bed) phía sau nhìn thấy rõ ràng nhưng kích thước nhỏ (minitruk, Tata Ace, các xe tải nhỏ địa phương), cần phân loại là `Truck` theo R04, không phải `Car`, bất kể chiều dài thân xe. Tiêu chí quyết định: xuất hiện vách ngăn cabin-thùng hàng hoặc thùng tải mở phía sau = Truck; không có thùng tải, chỉ có cốp xe = Car/Van.
+- **Áp dụng cho:** Class `Truck` và `Car`; zone `center` và `mid` nơi phương tiện đủ lớn để phân biệt hình thái; đặc biệt trong tập dữ liệu ADASIND (Ấn Độ) nơi các loại xe tải nhỏ địa phương rất phổ biến.
+- **Vì sao luật hiện tại (`docs/02-rules-vi.md`) không đủ:** R04 hiện tại chỉ liệt kê "xe bán tải nhỏ → Truck" nhưng không định nghĩa tiêu chí phân biệt giữa "bán tải nhỏ" và "xe con lớn" trong bối cảnh ảnh fisheye nơi chiều dài xe bị co giãn phi tuyến. Trong thực tế gán nhãn slice B3-dense, lỗi WRONG_CLASS tại frame adasind_145860 xảy ra chính xác do khoảng trống rule này: annotator gán Car vì thân xe trông nhỏ gọn, nhưng reference gán Truck vì có thùng hàng phía sau. Rule cần tiêu chí hình thái cụ thể thay vì chỉ dựa vào tên loại xe.
+- **`rules_version` mới:** v1.0.0 → v1.1.0
+- **Hiệu lực từ:** round r2_qa trở đi (áp dụng ngay cho bước QA peer review và rework); cần cập nhật prefill và re-annotation nếu phát hiện lỗi tương tự trong các slice khác.

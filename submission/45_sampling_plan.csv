@@ -1,9 +1,9 @@
 camera_id,slice_type,frames,risk,rationale
-front,normal,,TODO,TODO
-front,hard,,TODO,TODO
-rear,normal,,TODO,TODO
-rear,hard,,TODO,TODO
-left,normal,,TODO,TODO
-left,hard,,TODO,TODO
-right,normal,,TODO,TODO
-right,hard,,TODO,TODO
+front,normal,35,medium,Camera trước bao quát toàn bộ cảnh phía trước xe; điều kiện ánh sáng thay đổi (ngược sáng sáng sớm/chiều tối) và mật độ giao thông cao là rủi ro chính cần lấy mẫu đại diện cho điều kiện bình thường ban ngày
+front,hard,25,high,Camera trước gặp nhiều ca khó nhất: giao lộ đông đúc ThreeWheeler và Bike chen chúc zone center; phương tiện bị che khuất bởi xe ego-vehicle lớn; đèn xi nhan/đèn pha phản chiếu vào lens
+rear,normal,30,medium,Camera sau có nguy cơ bỏ sót phương tiện tiếp cận nhanh từ phía sau; mẫu normal bao phủ các tình huống đường thẳng ban ngày với lưu lượng giao thông trung bình
+rear,hard,20,high,Camera sau khó nhất khi xe ego đang lùi hoặc dừng tại giao lộ; phương tiện lớn (Truck/Bus) che khuất toàn bộ view; vùng ego_body rộng hơn che khuất phần dưới frame
+left,normal,30,medium,Camera trái xử lý làn đường ngược chiều và phương tiện vượt; mẫu normal đại diện cho điều kiện đường đôi thông thường ở thành thị Ấn Độ với mật độ Bike/ThreeWheeler cao
+left,hard,20,high,Camera trái đặc biệt khó tại vùng seam với camera trước khi xe rẽ trái; Bike và Pedestrian ở edge zone bị biến dạng cực lớn do góc rìa fisheye; truncated attribute dễ nhầm
+right,normal,25,medium,Camera phải quan sát lề đường và vỉa hè; Pedestrian và Bike tại các điểm dừng đỗ là đối tượng chính; mẫu normal bao phủ môi trường đô thị ban ngày
+right,hard,15,high,Camera phải khó nhất tại vùng seam với camera sau khi xe rẽ phải hoặc đổi làn; nhóm Pedestrian/Bike đông ở edge zone cần quyết định crowd_or_group hay box riêng lẻ; điều kiện thiếu sáng hoặc bóng đổ

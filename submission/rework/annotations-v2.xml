@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<annotations>
+  <version>1.1</version>
+  <meta>
+    <task>
+      <name>Day11 B3-dense rework-final</name>
+      <labels/>
+    </task>
+  </meta>
+  <image id="0" name="adasind_145860.jpg" width="1080" height="1920">
+    <box label="Truck" occluded="0" source="manual" xtl="394.00" ytl="798.00" xbr="485.00" ybr="912.00" z_order="0" truncated="false" zone="center"/>
+    <box label="Car" occluded="0" source="manual" xtl="218.00" ytl="820.00" xbr="310.00" ybr="920.00" z_order="0" truncated="false" zone="center"/>
+    <box label="ThreeWheeler" occluded="0" source="manual" xtl="520.00" ytl="845.00" xbr="620.00" ybr="960.00" z_order="0" truncated="false" zone="center"/>
+    <box label="Bike" occluded="0" source="manual" xtl="115.00" ytl="870.00" xbr="175.00" ybr="955.00" z_order="0" truncated="false" zone="mid"/>
+    <box label="Car" occluded="0" source="manual" xtl="680.00" ytl="760.00" xbr="790.00" ybr="870.00" z_order="0" truncated="false" zone="mid"/>
+    <box label="Bike" occluded="1" source="manual" xtl="820.00" ytl="795.00" xbr="870.00" ybr="860.00" z_order="0" truncated="false" zone="mid"/>
+    <box label="ThreeWheeler" occluded="0" source="manual" xtl="55.00" ytl="835.00" xbr="145.00" ybr="955.00" z_order="0" truncated="true" zone="edge"/>
+  </image>
+  <image id="1" name="adasind_167700.jpg" width="1080" height="1920">
+    <box label="ThreeWheeler" occluded="0" source="manual" xtl="65.00" ytl="985.00" xbr="185.00" ybr="1115.00" z_order="0" truncated="true" zone="edge"/>
+    <box label="Bike" occluded="0" source="manual" xtl="455.00" ytl="1040.00" xbr="555.00" ybr="1120.00" z_order="0" truncated="false" zone="center"/>
+    <box label="Car" occluded="0" source="manual" xtl="310.00" ytl="985.00" xbr="410.00" ybr="1085.00" z_order="0" truncated="false" zone="center"/>
+    <box label="ThreeWheeler" occluded="0" source="manual" xtl="580.00" ytl="975.00" xbr="680.00" ybr="1070.00" z_order="0" truncated="false" zone="center"/>
+    <box label="Bike" occluded="1" source="manual" xtl="195.00" ytl="1010.00" xbr="250.00" ybr="1080.00" z_order="0" truncated="false" zone="mid"/>
+    <box label="Car" occluded="0" source="manual" xtl="720.00" ytl="930.00" xbr="820.00" ybr="1020.00" z_order="0" truncated="false" zone="mid"/>
+  </image>
+  <image id="2" name="adasind_199770.jpg" width="1080" height="1920">
+    <box label="ThreeWheeler" occluded="0" source="manual" xtl="10.00" ytl="790.00" xbr="110.00" ybr="890.00" z_order="0" truncated="true" zone="edge"/>
+    <box label="Bike" occluded="0" source="manual" xtl="65.00" ytl="840.00" xbr="135.00" ybr="910.00" z_order="0" truncated="true" zone="edge"/>
+    <box label="Car" occluded="0" source="manual" xtl="280.00" ytl="810.00" xbr="390.00" ybr="915.00" z_order="0" truncated="false" zone="center"/>
+    <box label="ThreeWheeler" occluded="0" source="manual" xtl="420.00" ytl="820.00" xbr="520.00" ybr="930.00" z_order="0" truncated="false" zone="center"/>
+    <box label="Bike" occluded="1" source="manual" xtl="540.00" ytl="830.00" xbr="595.00" ybr="895.00" z_order="0" truncated="false" zone="center"/>
+    <box label="Car" occluded="0" source="manual" xtl="620.00" ytl="795.00" xbr="720.00" ybr="890.00" z_order="0" truncated="false" zone="mid"/>
+    <box label="Truck" occluded="0" source="manual" xtl="170.00" ytl="780.00" xbr="270.00" ybr="900.00" z_order="0" truncated="false" zone="center"/>
+  </image>
+</annotations>

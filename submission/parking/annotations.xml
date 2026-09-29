@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<annotations>
+  <version>1.1</version>
+  <meta>
+    <task>
+      <id>1</id>
+      <name>Day11 · parking_line · public-sample</name>
+      <size>1</size>
+      <mode>annotation</mode>
+      <overlap>0</overlap>
+      <bugtracker></bugtracker>
+      <created>2026-09-28 10:00:00.000000+07:00</created>
+      <updated>2026-09-28 10:00:00.000000+07:00</updated>
+      <labels>
+        <label>
+          <name>parking_line</name>
+          <color>#ffcc00</color>
+          <type>any</type>
+          <attributes>
+          </attributes>
+        </label>
+        <label>
+          <name>free_space</name>
+          <color>#35c98b</color>
+          <type>any</type>
+          <attributes>
+          </attributes>
+        </label>
+      </labels>
+    </task>
+  </meta>
+  <image id="0" name="parking-lot-core.jpg" width="960" height="720">
+    <polyline label="parking_line" source="manual" occluded="0" points="400.0,653.0;539.0,719.0" z_order="0">
+    </polyline>
+    <polyline label="parking_line" source="manual" occluded="0" points="693.0,623.0;952.0,681.0" z_order="0">
+    </polyline>
+    <polygon label="free_space" source="manual" occluded="0" points="80.0,650.0;350.0,620.0;650.0,590.0;900.0,580.0;920.0,530.0;500.0,520.0;100.0,540.0;50.0,600.0" z_order="0">
+    </polygon>
+  </image>
+</annotations>

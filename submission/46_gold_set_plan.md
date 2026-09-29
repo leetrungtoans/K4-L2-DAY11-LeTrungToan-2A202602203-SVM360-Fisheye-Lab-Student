@@ -2,17 +2,19 @@
 
 **Đầu bài:** 50.000 frame từ bốn camera SVM, ngân sách chọn 200 frame để review/gold. Đây là tình huống trên slide,
 **không phải** 50.000 frame có trong repo. Phân bổ đúng 200 ở `45_sampling_plan.csv` cho bốn camera, mỗi camera có
-normal và hard slice. “Gold set” ở đây là **kế hoạch tạo** reference sau kiểm chứng, không phải teaching reference
+normal và hard slice. "Gold set" ở đây là **kế hoạch tạo** reference sau kiểm chứng, không phải teaching reference
 ADASIND hoặc nhãn bạn vừa vẽ. Nếu cần, dùng `notebooks/day11-svm360-colab.ipynb` để thử tổng phân bổ; notebook
 không làm thay phần lý do.
 
 | camera_id | Hard case cần chọn | Vì sao dễ sai | Annotation space / calibration cần giữ | Cách review trước khi gọi là gold |
 |---|---|---|---|---|
-| front | TODO | TODO | TODO | TODO |
-| rear | TODO | TODO | TODO | TODO |
-| left | TODO | TODO | TODO | TODO |
-| right | TODO | TODO | TODO | TODO |
+| front | Giao lộ đông đúc Bike+ThreeWheeler zone center/mid; phương tiện ngược sáng/đèn pha phản chiếu; xe Bus/Truck che khuất Pedestrian phía sau | Mật độ cao làm ranh giới WRONG_CLASS (ThreeWheeler/Truck) và crowd_or_group khó phán đoán; điều kiện ngược sáng làm edge_zone và truncated attribute không nhất quán | Tọa độ calibration extrinsic camera trước (height, pitch, yaw); ego_body polygon theo từng xe thử nghiệm; timestamp bắt buộc để kiểm tra tốc độ xe | Hai reviewer độc lập gán nhãn cùng 20 hard frame; đồng thuận ≥80% IoU trước khi vào gold; đưa lên Lab Coach nếu còn bất đồng |
+| rear | Phương tiện tiếp cận nhanh từ phía sau; tình huống xe lùi; ego_body che khuất vùng rộng phía dưới | Camera sau có góc nhìn ngược chiều lái xe; hình dạng phương tiện xa bị nén lại, khó phân biệt Car/ThreeWheeler ở distance xa; ego_body lớn hơn đáng kể so với camera trước | Vùng ego_body thực tế cho từng xe (camera sau có bumper, đèn hậu rõ hơn); calibration để tính khoảng cách thực | Peer review 20 hard frame + so sánh với model prediction để phát hiện systematic bias; tập trung vào ca truncated tại mép dưới frame |
+| left | Vùng seam với camera trước khi xe rẽ trái; Bike/Pedestrian ở edge zone méo cực lớn; phương tiện ngược chiều tốc độ cao | Edge zone fisheye làm box phải bám theo hình học méo thực tế (R02) nhưng nhiều annotator có xu hướng "nắn thẳng"; ranh giới seam không có marker rõ | Bản đồ overlap zone giữa camera trái và trước; calibration để xác định điểm seam thực; timestamp đồng bộ để kiểm tra cùng đối tượng | Ba reviewer gán nhãn độc lập cho 20 frame seam zone; hội đồng thống nhất rule cho box ở vùng chồng trước khi freeze gold |
+| right | Vùng seam với camera sau khi đổi làn; Pedestrian/Bike tại điểm dừng và lề đường; điều kiện thiếu sáng/bóng đổ | Ranh giới crowd_or_group khó phán đoán tại điểm dừng đông người; box bị che một phần bởi cột đèn/biển báo; edge_zone attribute dễ nhầm khi gần rìa vành kính | Calibration camera phải; ego_body polygon cụ thể; mapping zone bán kính (center/mid/edge) phải nhất quán giữa camera phải và trái | Hai reviewer + round adjudication cho hard frame; đặc biệt tập trung vào ca occluded và ignore_region reason đúng loại |
 
-- Khi nào cần refresh gold set (đổi camera, calibration hoặc rule): TODO
-- Một ca seam/cross-camera cần policy và evidence trước khi ghép hai box: TODO
-- Vì sao peer agreement hoặc quality report trên ảnh một camera chưa chứng minh gold set đúng cho cả bốn camera: TODO
+- **Khi nào cần refresh gold set (đổi camera, calibration hoặc rule):** Gold set cần được refresh khi: (1) Thay đổi camera hardware hoặc thay đổi vị trí lắp đặt camera dẫn đến calibration mới (cx, cy, r khác) — toàn bộ lens_border polygon phải cập nhật; (2) Cập nhật guidelines (bump rules_version) ảnh hưởng đến định nghĩa class, attribute hoặc ignore_region — ít nhất 20% frame gold cần được review lại; (3) Phân bổ địa lý/thời gian thay đổi đáng kể (ví dụ mở rộng sang thành phố mới, thêm điều kiện ban đêm) — cần thêm hard frame mới đại diện cho điều kiện đó.
+
+- **Một ca seam/cross-camera cần policy và evidence trước khi ghép hai box:** Ví dụ: một Pedestrian đứng đúng tại đường seam giữa camera trái và camera trước, xuất hiện đồng thời trong cả hai ảnh với hai box có kích thước khác nhau (vì zone bán kính khác nhau ở hai camera). Không được tự ý ghép hai box thành một track ID hay xóa một box chỉ vì "trùng đối tượng" mà không có: (a) timestamp đồng bộ chứng minh đây là cùng khoảnh khắc; (b) extrinsic calibration để tính tọa độ thế giới thực; (c) policy cross-camera rõ ràng về output đích (giữ cả hai box cho downstream model, hay merge vào BEV representation). Cho đến khi có đủ ba điều kiện trên, hai box hợp lệ tại seam là trạng thái đúng.
+
+- **Vì sao peer agreement hoặc quality report trên ảnh một camera chưa chứng minh gold set đúng cho cả bốn camera:** Dữ liệu ADASIND chỉ có một camera front-facing; hiện tượng domain trong mỗi camera là khác nhau — camera rear có ego_body lớn hơn, camera left/right có seam zone phức tạp hơn, điều kiện ánh sáng tại mỗi góc đặt camera là khác nhau (rear có thể ngược sáng khi xe đối diện, left/right có bóng đổ từ thân xe ego). Một peer agreement cao trên slice B3-dense ADASIND chứng minh chất lượng annotation của ONE front camera trong ONE điều kiện; nó không generalize sang rear/left/right camera với góc nhìn, distortion pattern, và hard case hoàn toàn khác. Gold set đủ chất lượng cho hệ SVM bốn camera đòi hỏi dữ liệu đại diện từ cả bốn góc, trong nhiều điều kiện, được review bởi nhiều annotator chuyên biệt cho từng góc camera.

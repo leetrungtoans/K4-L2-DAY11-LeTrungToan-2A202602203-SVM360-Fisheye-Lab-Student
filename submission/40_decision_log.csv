@@ -1,1 +1,5 @@
 id,date,question,decision,rationale,status
+1,2026-09-28,Xe co thung hang phia sau (adasind_062370 L8) gan Car hay Truck?,Truck,Theo R04: xe ban tai nho/pickup cho hang anh xa thanh Truck khong phai Car,resolved
+2,2026-09-28,ThreeWheeler lon bi cat mep khung (adasind_086220 L1) co can truncated=true?,truncated=true bat buoc,Theo R05: truncated duoc danh khi vat bi cat boi bien khung hinh hoac vanh vong kinh,resolved
+3,2026-09-28,Phuong tien o xa voi chieu cao 37-40px (adasind_117120) co nen box theo nguong H=40?,Giu box neu chieu cao ge 38px va vat ro rang trong vung hop le; can lam ro rule cho truong hop sat nguong,Nguong H=40 theo R01 chua co huong dan cu the cho truong hop sat nguong; escalate len guideline owner,escalated
+4,2026-09-28,Rule R04 co du tieu chi phan loai xe tai nho dia phuong An Do tren anh fisheye khong?,Can bo sung tieu chi hinh thai trong R04-EXT v1.1.0 - vach ngan cabin-thung hang la dau hieu Truck,Loi WRONG_CLASS tai frame adasind_062370 L8 cho thay R04 hien tai khong du cu the de tranh nham lan Car va Truck nho tren fisheye,escalated
